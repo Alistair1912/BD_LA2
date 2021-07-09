@@ -1,0 +1,337 @@
+hdoop@ubuntu:~$ cd hadoop-3.2.1/sbin
+hdoop@ubuntu:~/hadoop-3.2.1/sbin$ ./start-all.sh
+WARNING: Attempting to start all Apache Hadoop daemons as hdoop in 10 seconds.
+WARNING: This is not a recommended production deployment configuration.
+WARNING: Use CTRL-C to abort.
+Starting namenodes on [localhost]
+Starting datanodes
+Starting secondary namenodes [ubuntu]
+2021-07-09 10:01:10,176 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Starting resourcemanager
+Starting nodemanagers
+hdoop@ubuntu:~/hadoop-3.2.1/sbin$ jps
+5426 SecondaryNameNode
+5891 NodeManager
+5206 DataNode
+5046 NameNode
+6062 Jps
+5726 ResourceManager
+hdoop@ubuntu:~/hadoop-3.2.1/sbin$ cd ../../eclipse-workspace/
+hdoop@ubuntu:~/eclipse-workspace$ ls
+bangalore      employees.csv  fiveyrs.jar  ise      wordCount
+bangalore.jar  fiveyrs        input.txt    ISE.jar  wordCount.jar
+hdoop@ubuntu:~/eclipse-workspace$ hadoop fs -copyFromLocal employees.csv
+2021-07-09 10:04:54,301 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+copyFromLocal: `.': No such file or directory: `hdfs://127.0.0.1:9000/user/hdoop'
+hdoop@ubuntu:~/eclipse-workspace$ hadoop fs -copyFromLocal employees.csv /
+2021-07-09 10:05:25,812 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2021-07-09 10:05:28,568 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+hdoop@ubuntu:~/eclipse-workspace$ hadoop fs -ls /
+2021-07-09 10:05:41,434 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 4 items
+-rw-r--r--   1 hdoop supergroup        683 2021-07-09 10:05 /employees.csv
+-rw-r--r--   1 hdoop supergroup         42 2021-07-09 05:37 /input.txt
+drwxr-xr-x   - hdoop supergroup          0 2021-07-09 05:56 /output2
+drwx------   - hdoop supergroup          0 2021-07-09 06:07 /tmp
+hdoop@ubuntu:~/eclipse-workspace$ hadoop jar ISE.jar ise.ISE /employees.csv /ISE
+2021-07-09 10:10:28,823 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2021-07-09 10:10:30,418 INFO client.RMProxy: Connecting to ResourceManager at /127.0.0.1:8032
+2021-07-09 10:10:32,488 INFO client.RMProxy: Connecting to ResourceManager at /127.0.0.1:8032
+2021-07-09 10:10:33,704 WARN mapreduce.JobResourceUploader: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+2021-07-09 10:10:33,825 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hdoop/.staging/job_1625850107169_0001
+2021-07-09 10:10:34,117 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-07-09 10:10:34,575 INFO mapred.FileInputFormat: Total input files to process : 1
+2021-07-09 10:10:34,664 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-07-09 10:10:34,744 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-07-09 10:10:34,778 INFO mapreduce.JobSubmitter: number of splits:2
+2021-07-09 10:10:35,557 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-07-09 10:10:35,645 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1625850107169_0001
+2021-07-09 10:10:35,646 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2021-07-09 10:10:36,391 INFO conf.Configuration: resource-types.xml not found
+2021-07-09 10:10:36,392 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2021-07-09 10:10:38,476 INFO impl.YarnClientImpl: Submitted application application_1625850107169_0001
+2021-07-09 10:10:38,752 INFO mapreduce.Job: The url to track the job: http://ubuntu:8088/proxy/application_1625850107169_0001/
+2021-07-09 10:10:38,757 INFO mapreduce.Job: Running job: job_1625850107169_0001
+2021-07-09 10:12:11,841 INFO mapreduce.Job: Job job_1625850107169_0001 running in uber mode : false
+2021-07-09 10:12:11,843 INFO mapreduce.Job:  map 0% reduce 0%
+2021-07-09 10:13:22,570 INFO mapreduce.Job:  map 50% reduce 0%
+2021-07-09 10:13:23,615 INFO mapreduce.Job:  map 100% reduce 0%
+2021-07-09 10:13:33,916 INFO mapreduce.Job:  map 100% reduce 100%
+2021-07-09 10:13:34,947 INFO mapreduce.Job: Job job_1625850107169_0001 completed successfully
+2021-07-09 10:13:35,323 INFO mapreduce.Job: Counters: 54
+	File System Counters
+		FILE: Number of bytes read=120
+		FILE: Number of bytes written=677606
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=1199
+		HDFS: Number of bytes written=53
+		HDFS: Number of read operations=11
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+		HDFS: Number of bytes read erasure-coded=0
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=130795
+		Total time spent by all reduces in occupied slots (ms)=8086
+		Total time spent by all map tasks (ms)=130795
+		Total time spent by all reduce tasks (ms)=8086
+		Total vcore-milliseconds taken by all map tasks=130795
+		Total vcore-milliseconds taken by all reduce tasks=8086
+		Total megabyte-milliseconds taken by all map tasks=133934080
+		Total megabyte-milliseconds taken by all reduce tasks=8280064
+	Map-Reduce Framework
+		Map input records=21
+		Map output records=6
+		Map output bytes=330
+		Map output materialized bytes=126
+		Input split bytes=174
+		Combine input records=6
+		Combine output records=2
+		Reduce input groups=1
+		Reduce shuffle bytes=126
+		Reduce input records=2
+		Reduce output records=1
+		Spilled Records=4
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=9157
+		CPU time spent (ms)=23760
+		Physical memory (bytes) snapshot=660410368
+		Virtual memory (bytes) snapshot=7742754816
+		Total committed heap usage (bytes)=628621312
+		Peak Map Physical memory (bytes)=235810816
+		Peak Map Virtual memory (bytes)=2579042304
+		Peak Reduce Physical memory (bytes)=189493248
+		Peak Reduce Virtual memory (bytes)=2586243072
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=1025
+	File Output Format Counters 
+		Bytes Written=53
+hdoop@ubuntu:~/eclipse-workspace$ hadoop fs -ls /ISE
+2021-07-09 10:14:41,340 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 2 items
+-rw-r--r--   1 hdoop supergroup          0 2021-07-09 10:13 /ISE/_SUCCESS
+-rw-r--r--   1 hdoop supergroup         53 2021-07-09 10:13 /ISE/part-00000
+hdoop@ubuntu:~/eclipse-workspace$ hadoop fs -cat /ISE/part-00000
+2021-07-09 10:15:35,639 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2021-07-09 10:15:37,493 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+Total no.of employees working in ISE Department : 	6
+hdoop@ubuntu:~/eclipse-workspace$ 
+hdoop@ubuntu:~/eclipse-workspace$ 
+hdoop@ubuntu:~/eclipse-workspace$ 
+hdoop@ubuntu:~/eclipse-workspace$ 
+hdoop@ubuntu:~/eclipse-workspace$ ls
+bangalore      employees.csv  fiveyrs.jar  ise      wordCount
+bangalore.jar  fiveyrs        input.txt    ISE.jar  wordCount.jar
+hdoop@ubuntu:~/eclipse-workspace$ hadoop jar fiveyrs.jar fiveyrs.fiveyrs /employees.csv /Fiveyrs
+2021-07-09 10:39:35,310 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2021-07-09 10:39:46,055 INFO client.RMProxy: Connecting to ResourceManager at /127.0.0.1:8032
+2021-07-09 10:39:52,864 INFO client.RMProxy: Connecting to ResourceManager at /127.0.0.1:8032
+2021-07-09 10:39:56,734 WARN mapreduce.JobResourceUploader: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+2021-07-09 10:39:56,910 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hdoop/.staging/job_1625850107169_0002
+2021-07-09 10:39:57,703 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-07-09 10:39:58,456 INFO mapred.FileInputFormat: Total input files to process : 1
+2021-07-09 10:39:58,670 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-07-09 10:39:59,241 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-07-09 10:39:59,291 INFO mapreduce.JobSubmitter: number of splits:2
+2021-07-09 10:40:00,421 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-07-09 10:40:00,586 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1625850107169_0002
+2021-07-09 10:40:00,587 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2021-07-09 10:40:02,342 INFO conf.Configuration: resource-types.xml not found
+2021-07-09 10:40:02,344 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2021-07-09 10:40:04,285 INFO impl.YarnClientImpl: Submitted application application_1625850107169_0002
+2021-07-09 10:40:05,394 INFO mapreduce.Job: The url to track the job: http://ubuntu:8088/proxy/application_1625850107169_0002/
+2021-07-09 10:40:05,441 INFO mapreduce.Job: Running job: job_1625850107169_0002
+2021-07-09 10:40:55,854 INFO mapreduce.Job: Job job_1625850107169_0002 running in uber mode : false
+2021-07-09 10:40:56,056 INFO mapreduce.Job:  map 0% reduce 0%
+2021-07-09 10:42:30,435 INFO mapreduce.Job:  map 100% reduce 0%
+2021-07-09 10:43:05,552 INFO mapreduce.Job:  map 100% reduce 100%
+2021-07-09 10:43:06,595 INFO mapreduce.Job: Job job_1625850107169_0002 completed successfully
+2021-07-09 10:43:07,055 INFO mapreduce.Job: Counters: 54
+	File System Counters
+		FILE: Number of bytes read=130
+		FILE: Number of bytes written=677713
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=1199
+		HDFS: Number of bytes written=58
+		HDFS: Number of read operations=11
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+		HDFS: Number of bytes read erasure-coded=0
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=174888
+		Total time spent by all reduces in occupied slots (ms)=29381
+		Total time spent by all map tasks (ms)=174888
+		Total time spent by all reduce tasks (ms)=29381
+		Total vcore-milliseconds taken by all map tasks=174888
+		Total vcore-milliseconds taken by all reduce tasks=29381
+		Total megabyte-milliseconds taken by all map tasks=179085312
+		Total megabyte-milliseconds taken by all reduce tasks=30086144
+	Map-Reduce Framework
+		Map input records=21
+		Map output records=5
+		Map output bytes=300
+		Map output materialized bytes=136
+		Input split bytes=174
+		Combine input records=5
+		Combine output records=2
+		Reduce input groups=1
+		Reduce shuffle bytes=136
+		Reduce input records=2
+		Reduce output records=1
+		Spilled Records=4
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=11287
+		CPU time spent (ms)=14240
+		Physical memory (bytes) snapshot=620756992
+		Virtual memory (bytes) snapshot=7746695168
+		Total committed heap usage (bytes)=563609600
+		Peak Map Physical memory (bytes)=219025408
+		Peak Map Virtual memory (bytes)=2579505152
+		Peak Reduce Physical memory (bytes)=186675200
+		Peak Reduce Virtual memory (bytes)=2588377088
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=1025
+	File Output Format Counters 
+		Bytes Written=58
+hdoop@ubuntu:~/eclipse-workspace$ hadoop fs -ls /Fiveyrs
+2021-07-09 10:44:38,869 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 2 items
+-rw-r--r--   1 hdoop supergroup          0 2021-07-09 10:43 /Fiveyrs/_SUCCESS
+-rw-r--r--   1 hdoop supergroup         58 2021-07-09 10:43 /Fiveyrs/part-00000
+hdoop@ubuntu:~/eclipse-workspace$ hadoop fs -cat /Fiveyrs/part-00000
+2021-07-09 10:45:25,094 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2021-07-09 10:45:27,186 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+Total no.of employees who have 5 years of experience : 	5
+hdoop@ubuntu:~/eclipse-workspace$ hadoop jar bangalore.jar bangalore.bangalore /employees.csv /Bangalore
+2021-07-09 10:46:05,171 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2021-07-09 10:46:06,743 INFO client.RMProxy: Connecting to ResourceManager at /127.0.0.1:8032
+2021-07-09 10:46:07,367 INFO client.RMProxy: Connecting to ResourceManager at /127.0.0.1:8032
+2021-07-09 10:46:07,918 WARN mapreduce.JobResourceUploader: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+2021-07-09 10:46:08,038 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hdoop/.staging/job_1625850107169_0003
+2021-07-09 10:46:08,291 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-07-09 10:46:08,654 INFO mapred.FileInputFormat: Total input files to process : 1
+2021-07-09 10:46:08,773 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-07-09 10:46:08,854 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-07-09 10:46:08,912 INFO mapreduce.JobSubmitter: number of splits:2
+2021-07-09 10:46:09,239 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-07-09 10:46:09,329 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1625850107169_0003
+2021-07-09 10:46:09,329 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2021-07-09 10:46:09,904 INFO conf.Configuration: resource-types.xml not found
+2021-07-09 10:46:09,905 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2021-07-09 10:46:10,076 INFO impl.YarnClientImpl: Submitted application application_1625850107169_0003
+2021-07-09 10:46:10,176 INFO mapreduce.Job: The url to track the job: http://ubuntu:8088/proxy/application_1625850107169_0003/
+2021-07-09 10:46:10,179 INFO mapreduce.Job: Running job: job_1625850107169_0003
+2021-07-09 10:46:26,020 INFO mapreduce.Job: Job job_1625850107169_0003 running in uber mode : false
+2021-07-09 10:46:26,023 INFO mapreduce.Job:  map 0% reduce 0%
+2021-07-09 10:46:56,991 INFO mapreduce.Job:  map 83% reduce 0%
+2021-07-09 10:46:58,324 INFO mapreduce.Job:  map 100% reduce 0%
+2021-07-09 10:47:15,678 INFO mapreduce.Job:  map 100% reduce 100%
+2021-07-09 10:47:17,791 INFO mapreduce.Job: Job job_1625850107169_0003 completed successfully
+2021-07-09 10:47:18,096 INFO mapreduce.Job: Counters: 54
+	File System Counters
+		FILE: Number of bytes read=112
+		FILE: Number of bytes written=677692
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=1199
+		HDFS: Number of bytes written=49
+		HDFS: Number of read operations=11
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+		HDFS: Number of bytes read erasure-coded=0
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=55060
+		Total time spent by all reduces in occupied slots (ms)=15311
+		Total time spent by all map tasks (ms)=55060
+		Total time spent by all reduce tasks (ms)=15311
+		Total vcore-milliseconds taken by all map tasks=55060
+		Total vcore-milliseconds taken by all reduce tasks=15311
+		Total megabyte-milliseconds taken by all map tasks=56381440
+		Total megabyte-milliseconds taken by all reduce tasks=15678464
+	Map-Reduce Framework
+		Map input records=21
+		Map output records=5
+		Map output bytes=255
+		Map output materialized bytes=118
+		Input split bytes=174
+		Combine input records=5
+		Combine output records=2
+		Reduce input groups=1
+		Reduce shuffle bytes=118
+		Reduce input records=2
+		Reduce output records=1
+		Spilled Records=4
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=2896
+		CPU time spent (ms)=18650
+		Physical memory (bytes) snapshot=704356352
+		Virtual memory (bytes) snapshot=7736221696
+		Total committed heap usage (bytes)=569376768
+		Peak Map Physical memory (bytes)=283906048
+		Peak Map Virtual memory (bytes)=2578059264
+		Peak Reduce Physical memory (bytes)=187899904
+		Peak Reduce Virtual memory (bytes)=2584977408
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=1025
+	File Output Format Counters 
+		Bytes Written=49
+hdoop@ubuntu:~/eclipse-workspace$ hadoop fs -ls /
+2021-07-09 10:47:29,101 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 7 items
+drwxr-xr-x   - hdoop supergroup          0 2021-07-09 10:47 /Bangalore
+drwxr-xr-x   - hdoop supergroup          0 2021-07-09 10:43 /Fiveyrs
+drwxr-xr-x   - hdoop supergroup          0 2021-07-09 10:13 /ISE
+-rw-r--r--   1 hdoop supergroup        683 2021-07-09 10:05 /employees.csv
+-rw-r--r--   1 hdoop supergroup         42 2021-07-09 05:37 /input.txt
+drwxr-xr-x   - hdoop supergroup          0 2021-07-09 05:56 /output2
+drwx------   - hdoop supergroup          0 2021-07-09 06:07 /tmp
+hdoop@ubuntu:~/eclipse-workspace$ hadoop fs -ls /Bangalore
+2021-07-09 10:48:20,980 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 2 items
+-rw-r--r--   1 hdoop supergroup          0 2021-07-09 10:47 /Bangalore/_SUCCESS
+-rw-r--r--   1 hdoop supergroup         49 2021-07-09 10:47 /Bangalore/part-00000
+hdoop@ubuntu:~/eclipse-workspace$ hadoop fs -cat /Bangalore/part-00000
+2021-07-09 10:49:02,496 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2021-07-09 10:49:04,499 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+Total no.of employees who live in Bangalore : 	5
+
